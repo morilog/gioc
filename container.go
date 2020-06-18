@@ -83,6 +83,11 @@ func (b binding) resolve() (interface{}, error) {
 		return nil, values[1].Interface().(error)
 	}
 
+	if b.singleton && !b.resolved {
+		b.instance = values[0].Interface()
+		b.resolved = true
+	}
+
 	return values[0].Interface(), nil
 }
 
